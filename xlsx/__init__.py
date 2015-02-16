@@ -182,7 +182,10 @@ class Sheet(object):
                             data = columnNode.find("{http://schemas.openxmlformats.org/spreadsheetml/2006/main}v").text
                     elif columnNode.find("{http://schemas.openxmlformats.org/spreadsheetml/2006/main}is") is not None:
                         if colType == "inlineStr":
-                            data = columnNode[0][0].text
+                            try:
+                                data = columnNode[0][0].text
+                            except IndexError:
+                                data = ''
 
                     if columnNode.find("{http://schemas.openxmlformats.org/spreadsheetml/2006/main}f") is not None:
                         formula = columnNode.find("{http://schemas.openxmlformats.org/spreadsheetml/2006/main}f").text
